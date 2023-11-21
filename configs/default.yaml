@@ -1,0 +1,38 @@
+seed: 42
+num_gpus: 1
+debug: False
+out_dir: "./outputs"
+resume_ckpt: None
+
+nerf:
+  N_samples: 128
+  N_importance: 128
+  N_emb_xyz: 10
+  N_emb_dir: 4
+  near: 0.1
+  far: 5.
+  appearance_dim: 48
+  candidate_dim: 16
+  feat_dim: 384
+  use_disp: False
+  perturb: 1.0
+t_net:
+  beta_min: 0.1
+  transient_dim: 128
+  feat_dim: 384
+
+loss:
+  depth_mult: 1e-3
+  alpha_reg: 1.
+optimizer:
+  type: 'adam'
+  lr: 5e-4
+  scheduler:
+    type: 'ExponentialLR'
+    lr_end: 5e-5
+optimizer_pose:
+  type: 'adam'
+  lr: 2e-3
+  scheduler:
+    type: 'ExponentialLR'
+    lr_end: 1e-5

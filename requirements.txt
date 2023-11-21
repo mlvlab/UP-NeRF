@@ -1,0 +1,15 @@
+pytorch-lightning==1.9.0
+einops
+opencv-python
+pandas
+kornia
+easydict
+torch_optimizer
+lpips
+matplotlib
+imageio
+wandb
+
+# dino & dpt
+scikit-learn
+timm

@@ -1,0 +1,6 @@
+[submodule "dino-vit-features"]
+	path = dino-vit-features
+	url = https://github.com/ShirAmir/dino-vit-features.git
+[submodule "DPT"]
+	path = DPT
+	url = https://github.com/isl-org/DPT
