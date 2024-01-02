@@ -54,7 +54,7 @@ Scenes provided are {brandenburg_gate, british_museum, lincoln_memorial_statue, 
 ## Data Preprocessing
 Before training you need to save DINO feature maps and DPT mono-depth maps.
 
-Initialize the external submodule. (Last sanity check on Nov 1st, 2023)
+Initialize the external submodule. (Last sanity check on Jan 2st, 2024)
 ```
 git submodule update --init --recursive
 ```
@@ -73,7 +73,7 @@ Additionally, we highly recommend saving the cache data.
 Run (example)
 
 ```diff
-python prepare_phototourim.py --config configs/brandenburg_gate.yaml
+python prepare_phototourism.py --config configs/brandenburg_gate.yaml
 ```
 
 ## Training
