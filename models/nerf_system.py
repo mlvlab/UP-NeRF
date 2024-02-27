@@ -412,6 +412,7 @@ class NeRFSystem(LightningModule):
     def log_pose(self):
         if self.hparams["debug"]:
             return
+        if not hasattr(self.train_dataset, "GT_poses_dict"): return
         noised_poses = torch.stack(
             [self.train_dataset.poses_dict[i] for i in self.train_dataset.img_ids_train]
         )

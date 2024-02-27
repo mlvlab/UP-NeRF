@@ -95,15 +95,25 @@ class CustomDataset(Dataset):
                 K[1, 2] = (height / 2) / self.scale  # cy
                 K[2, 2] = 1
                 self.Ks[id_] = K
-
-        # dummy for compatibility with prepare_phototourism.py
         if self.use_cache:
             self.poses = np.load(os.path.join(self.root_dir, "cache/poses.npy"))
+        else:
+            # Pose must be right up back!
+            try:
+                poses = []
+                for id_, value in metadata.items():
+                    poses.append(value["c2w"])
+                self.poses = np.stack(poses, 0)
+            except KeyError:
+                self.poses = np.array([])
+        if len(self.poses) > 0:
+            self.GT_poses_dict = {id_: self.poses[i] for i, id_ in enumerate(self.img_ids)}
+        # dummy for compatibility with prepare_phototourism.py
+        if self.use_cache:
             self.nears = load_pickle(os.path.join(self.root_dir, "cache/nears.pkl"))
             self.fars = load_pickle(os.path.join(self.root_dir, "cache/fars.pkl"))
             self.xyz_world = np.load(os.path.join(self.root_dir, "cache/xyz_world.npy"))
         else:
-            self.poses = np.array([])
             self.nears = np.array([])
             self.fars = np.array([])
             self.xyz_world = np.array([])
