@@ -52,8 +52,8 @@ sh scripts/download_phototourism.sh brandenburg_gate
 Scenes provided are {brandenburg_gate, british_museum, lincoln_memorial_statue, pantheon_exterior, sacre_coeur, st_pauls_cathedral, taj_mahal, trevi_fountain}
 
 ### 3. Custom Dataset
-To run with your own dataset, please check the format of metadata in data/example/metadata.json. (You can omit c2w fields if pose evaluation is not necessary). In addition, c2w matrices must be right up back format)
-You have to put images in dense/images (mandatory for compatability).
+To run with your own dataset, please check the format of metadata in data/example/metadata.json. (You can omit c2w fields if pose evaluation is not necessary. In addition, c2w matrices must be right up back format)
+You must put images in dense/images (mandatory for compatability).
 
 
 ## Data Preprocessing
