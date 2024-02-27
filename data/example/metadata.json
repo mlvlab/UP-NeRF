@@ -1,0 +1,17 @@
+{
+    "0" : {
+        "name":"dense/images/001.jpg", 
+        "focal": 1000, 
+        "split": "train"
+    },
+    "1" : {
+        "name": "dense/images/002.jpg", 
+        "focal": 800, 
+        "split": "train"
+    },
+    "2" : {
+        "name":"dense/images/003.jpg", 
+        "focal": 600,
+        "split": "test"
+    }
+}

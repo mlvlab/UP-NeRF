@@ -82,8 +82,12 @@ python prepare_phototourism.py --config configs/brandenburg_gate.yaml
 
 ### Caching Custom Dataset
 Script is slightly different, so we separate the script file.
-sh ./preprocess/preprocess_all_custom.sh data/example (you have to specify root directory of dataset)
+```diff
+sh ./preprocess/preprocess_all_custom.sh data/example # you have to specify root directory of dataset
 python prepare_phototourism.py --config configs/example.yaml
+```
+ 
+
 
 ## Training
 ```diff

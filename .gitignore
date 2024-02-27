@@ -6,7 +6,12 @@ results/
 wandb/
 lightning_logs/
 tmp/
-data
+data/*
+!data/example/
+data/example/*
+!data/example/dense/
+!data/example/dense/image
+!data/example/metadata.json
 outputs/
 *.ply
 *.vol
