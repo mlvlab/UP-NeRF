@@ -16,7 +16,7 @@ from dpt.midas_net import MidasNet_large
 from dpt.models import DPTDepthModel
 from dpt.transforms import NormalizeImage, PrepareForNet, Resize
 from torchvision.transforms import Compose
-
+from glob import glob
 
 def run(input_path, output_path, model_path, model_type="dpt_hybrid", optimize=True):
     """Run MonoDepthNN to compute depth maps.
@@ -119,7 +119,7 @@ def run(input_path, output_path, model_path, model_type="dpt_hybrid", optimize=T
 
     # get input
     if args.tsv_path is None:
-        file_names = os.path.listdir(input_path)
+        file_names = list(map(lambda x:os.path.basename(x), glob(args.input_path + "/*")))
     else:
         files = pd.read_csv(args.tsv_path, sep="\t")
         files = files[~files["id"].isnull()]  # remove data without id

@@ -51,6 +51,10 @@ sh scripts/download_phototourism.sh brandenburg_gate
 ```
 Scenes provided are {brandenburg_gate, british_museum, lincoln_memorial_statue, pantheon_exterior, sacre_coeur, st_pauls_cathedral, taj_mahal, trevi_fountain}
 
+### 3. Custom Dataset
+To run with your own dataset, please check the format of metadata in data/example/metadata.json.
+You have to put images in dense/images (mandatory for compatability).
+
 ## Data Preprocessing
 Before training you need to save DINO feature maps and DPT mono-depth maps.
 
@@ -76,6 +80,11 @@ Run (example)
 python prepare_phototourism.py --config configs/brandenburg_gate.yaml
 ```
 
+### Caching Custom Dataset
+Script is slightly different, so we separate the script file.
+sh ./preprocess/preprocess_all_custom.sh data/example (you have to specify root directory of dataset)
+python prepare_phototourism.py --config configs/example.yaml
+
 ## Training
 ```diff
 # If you saved the cache data.
@@ -84,6 +93,7 @@ python train.py --config configs/brandenburg_gate.yaml
 # If you did not save the cache data.
 python train.py --config configs/brandenburg_gate.yaml phototourism.use_cache False
 ```
+
 
 You can change the yaml file to change the scene. Check the config files in ./configs
 # :mag_right: Evaluation

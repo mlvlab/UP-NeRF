@@ -1,0 +1,26 @@
+dataset_name: 'custom'
+scene_name: 'example'
+exp_name: 'UP-NeRF'
+root_dir: 'data/example/'
+feat_dir: 'data/example/DINO'
+depth_dir: 'data/example/DPT'
+max_steps: 600000
+
+phototourism: # just leave the field as phototourism for convenience
+  img_downscale: 4
+  use_cache: True
+train:
+  batch_size: 2048
+  num_workers: 4
+  shuffle: True
+  log_pose_interval: 3000
+val:
+  img_idx: [0]
+  log_interval: 0.25
+  chunk_size: 4096
+  log_image_list: ['rgb_fine','c_depth_fine','s_rgb_fine','s_depth_fine','t_weight_fine','feat_fine','t_beta','t_alpha','t_rgb']
+pose:
+  optimize: True
+  c2f: [0.1,0.5]
+  noise: -1
+candidate_schedule: [0.1,0.5]

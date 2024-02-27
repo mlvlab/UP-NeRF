@@ -11,6 +11,7 @@ import torch
 from extractor import ViTExtractor
 from sklearn.decomposition import PCA
 from tqdm import tqdm
+from glob import glob
 
 
 def main(args):
@@ -23,7 +24,7 @@ def main(args):
     os.makedirs(pca_save_dir, exist_ok=True)
 
     if args.tsv_path is None:
-        file_names = os.path.listdir(args.image_dir)
+        file_names = list(map(lambda x:os.path.basename(x), glob(args.image_dir + "/*")))
     else:
         files = pd.read_csv(args.tsv_path, sep="\t")
         files = files[~files["id"].isnull()]  # remove data without id

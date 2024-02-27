@@ -236,7 +236,6 @@ class NeRFSystem(LightningModule):
         pose = batch["c2w"][0]  # (3,4)
         feats = batch["feats"][0]  # (H*W, feat_dim)
         inv_depths = batch["inv_depths"][0]  # (H*W)
-
         if self.hparams["pose.optimize"]:
             pose_refine = camera_utils.lie.se3_to_SE3(self.se3_refine(img_idx))
             refined_pose = camera_utils.pose.compose([pose_refine, pose])
@@ -321,16 +320,13 @@ class NeRFSystem(LightningModule):
     def dataset_setup(self):
         dataset = dataset_dict[self.hparams["dataset_name"]]
         kwargs = {"root_dir": self.hparams["root_dir"]}
-        if self.hparams["dataset_name"] == "phototourism":
-            kwargs["scene_name"] = self.hparams["scene_name"]
-            kwargs["img_downscale"] = self.hparams["phototourism.img_downscale"]
-            kwargs["use_cache"] = self.hparams["phototourism.use_cache"]
-            kwargs["feat_dir"] = self.hparams["feat_dir"]
-            kwargs["depth_dir"] = self.hparams["depth_dir"]
-            kwargs["near"] = self.hparams["nerf.near"]
-            kwargs["far"] = self.hparams["nerf.far"]
-        else:
-            raise NotImplementedError
+        kwargs["scene_name"] = self.hparams["scene_name"]
+        kwargs["img_downscale"] = self.hparams["phototourism.img_downscale"]
+        kwargs["use_cache"] = self.hparams["phototourism.use_cache"]
+        kwargs["feat_dir"] = self.hparams["feat_dir"]
+        kwargs["depth_dir"] = self.hparams["depth_dir"]
+        kwargs["near"] = self.hparams["nerf.near"]
+        kwargs["far"] = self.hparams["nerf.far"]
         self.train_dataset = dataset(
             split="train", camera_noise=self.hparams["pose.noise"], **kwargs
         )

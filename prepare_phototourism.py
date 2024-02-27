@@ -5,8 +5,8 @@ import pickle
 import numpy as np
 
 from configs.config import parse_args
-from datasets import PhototourismDataset
-
+from datasets import PhototourismDataset, CustomDataset
+from datasets import dataset_dict
 from contextlib import contextmanager
 
 @contextmanager
@@ -40,7 +40,8 @@ if __name__ == "__main__":
     os.makedirs(cache_dir, exist_ok=True)
 
     print(f"Preparing cache for scale {scale}. It can take several minutes...")
-    dataset = PhototourismDataset(
+    DATASETCLS = dataset_dict[hparams["dataset_name"]]
+    dataset = DATASETCLS(
         root_dir=root_dir,
         scene_name=hparams["scene_name"],
         feat_dir=hparams["feat_dir"],
