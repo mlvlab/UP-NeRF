@@ -171,11 +171,11 @@ class NeRFSystemOptimize(NeRFSystem):
 
         # log
         idx = self.val_dataset.optimize_num
-        if self.hparams["dataset_name"] == "phototourism":
+        if self.hparams["dataset_name"] in ["phototourism", "custom"]:
             WH = batch["img_wh"]
             W, H = WH[0].item(), WH[1].item()
         else:
-            W, H = self.hparams["blender.img_wh"]
+            raise NotImplementedError
         img = results[f"s_rgb_fine"].view(H, W, -1).permute(2, 0, 1).cpu()  # (3, H, W)
         img_gt = rgbs.view(H, W, 3).permute(2, 0, 1).cpu()  # (3, H, W)
 
@@ -233,7 +233,7 @@ class NeRFSystemOptimize(NeRFSystem):
     def dataset_setup(self):
         dataset = dataset_dict[self.hparams["dataset_name"] + "_optimize"]
         kwargs = {"root_dir": self.hparams["root_dir"]}
-        if self.hparams["dataset_name"] == "phototourism":
+        if self.hparams["dataset_name"] in ["phototourism", "custom"]:
             kwargs["scene_name"] = self.hparams["scene_name"]
             kwargs["img_downscale"] = self.hparams["phototourism.img_downscale"]
             kwargs["use_cache"] = self.hparams["phototourism.use_cache"]

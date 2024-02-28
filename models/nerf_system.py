@@ -432,7 +432,7 @@ class NeRFSystem(LightningModule):
             self.log("train/pose_R", pose_error["R"].mean() * 180 / torch.pi)
             self.log("train/pose_t", pose_error["t"].mean())
 
-        if self.hparams["dataset_name"] == "phototourism":
+        if self.hparams["dataset_name"] in ["phototourism", "custom"]:
             viz_N = 20
             pose_idx = list(range(viz_N))
             if pose_error is None:

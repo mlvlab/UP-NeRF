@@ -123,9 +123,6 @@ python eval.py \
   --ckpt last
 ```
 
-## Custom datasets
-Currently tto.py and eval.py are only compatible with phototourism datasets.
-If you also need them for custom datasets, create new issue.
 
 # 📂 Weights
 You can download pretrained weights from [here](https://drive.google.com/drive/folders/1L4xvuqI8umHOr7ViFMxQT7AxgEOpC9Jc?usp=sharing).

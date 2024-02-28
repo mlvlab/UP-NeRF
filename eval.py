@@ -15,7 +15,7 @@ def main(checkpoint):
     se3_refine = checkpoint["state_dict"]["se3_refine.weight"]
 
     # pose
-    dataset = dataset_dict["phototourism"](
+    dataset = dataset_dict[hparams["dataset_name"]](
         hparams["root_dir"],
         scene_name=hparams["scene_name"],
         feat_dir=None,
@@ -25,18 +25,21 @@ def main(checkpoint):
         img_downscale=hparams["phototourism.img_downscale"],
         use_cache=True,
     )
-    noised_poses = torch.stack([dataset.poses_dict[i] for i in dataset.img_ids_train])
-    gt_poses = torch.stack(
-        [torch.from_numpy(dataset.GT_poses_dict[i]) for i in dataset.img_ids_train]
-    )
-    pose_refine_ = camera_utils.lie.se3_to_SE3(se3_refine).cpu()
-    refine_poses = camera_utils.pose.compose([pose_refine_, noised_poses])
+    if hasattr(dataset, "GT_poses_dict"):
+        noised_poses = torch.stack([dataset.poses_dict[i] for i in dataset.img_ids_train])
+        gt_poses = torch.stack(
+            [torch.from_numpy(dataset.GT_poses_dict[i]) for i in dataset.img_ids_train]
+        )
+        pose_refine_ = camera_utils.lie.se3_to_SE3(se3_refine).cpu()
+        refine_poses = camera_utils.pose.compose([pose_refine_, noised_poses])
 
-    pose_error, aligned_poses, gt_poses = metric_utils.pose_metric(
-        refine_poses, gt_poses
-    )
-    print("train/pose_R", pose_error["R"].mean() * 180 / np.pi)
-    print("train/pose_t", pose_error["t"].mean())
+        pose_error, aligned_poses, gt_poses = metric_utils.pose_metric(
+            refine_poses, gt_poses
+        )
+        print("train/pose_R", pose_error["R"].mean() * 180 / np.pi)
+        print("train/pose_t", pose_error["t"].mean())
+    else:
+        print("Dataset does not have GT poses. Skip pose evaluation.")
 
     # novel view synthesis (need to run tto.py)
     root_dir = os.path.join(

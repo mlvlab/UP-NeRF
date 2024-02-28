@@ -1,12 +1,12 @@
 dataset_name: 'custom'
 scene_name: 'example'
 exp_name: 'UP-NeRF'
-root_dir: 'data/example/'
+root_dir: 'data/example'
 feat_dir: 'data/example/DINO'
 depth_dir: 'data/example/DPT'
 max_steps: 600000
 
-phototourism: # just leave the field as phototourism for convenience
+phototourism: # just leave the field as phototourism for compatibility
   img_downscale: 4
   use_cache: True
 train:
