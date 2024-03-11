@@ -1,5 +1,5 @@
 # UP-NeRF: Unconstrained Pose-Prior-Free Neural Radiance Fields
-**[Project Page](https://mlvlab.github.io/upnerf/) |
+**[Project Page](https://mlvlab.github.io/UP-NeRF/) |
 [Paper](https://arxiv.org/abs/2311.03784)**
 
 Injae Kim*,
